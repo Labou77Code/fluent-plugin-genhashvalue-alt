@@ -4,8 +4,8 @@ module Fluent::Plugin
   class GenHashValueFilter < Filter
     Fluent::Plugin.register_filter('genhashvalue-alt', self)
 
-
-    config_param :keys, :array
+    config_param :keys, :array, :default => []
+    config_param :use_entire_record, :bool, :default => false
     config_param :set_key, :string, :default => '_hash'
     config_param :inc_time_as_key, :bool, :default => true
     config_param :inc_tag_as_key, :bool, :default => true
@@ -23,6 +23,11 @@ module Fluent::Plugin
     def configure(conf)
       #$log.trace "configure #{conf}"
       super
+      if !@use_entire_record
+        if @keys.empty?
+          raise Fluent::ConfigError, "When using record as hash seed, users must specify `keys`."
+        end
+      end
     end
 
     def start
@@ -40,7 +45,12 @@ module Fluent::Plugin
       s += tag + separator if inc_tag_as_key
       s += time.to_s + separator if inc_time_as_key
 
-      s += keys.map {|k| record[k]}.join(separator)
+      if @use_entire_record
+        record.each {|k,v| s += "|#{k}|#{v}"}
+      else
+        s += keys.map {|k| record[k]}.join(separator)
+      end
+      
       if base64_enc || base91_enc then
         record[set_key] = hash_enc(hash_type, s)
       else
