@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "fluent-plugin-genhashvalue-alt"
-  spec.version       = "1.0"
+  spec.version       = "1.0.0"
   spec.authors       = ["Labou77Code"]
 
   spec.summary       = %q{generate hash value}
