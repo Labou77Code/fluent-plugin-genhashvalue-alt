@@ -24,12 +24,12 @@ Or install it yourself as:
 
 ## Configuration
 
-Example:
+Example if you want to compute hash based on 2 keys (e.g key1 and key2) of your record:
 
     <filter foo.**>
       type genhashvalue
 
-      keys type,descr
+      keys key1,key2
       hash_type md5    # md5/sha1/sha256/sha512
       base64_enc true
       base91_enc false
@@ -38,6 +38,22 @@ Example:
       inc_time_as_key true
       inc_tag_as_key false
     </filter>
+
+Example if you want to compute hash on the entire record:
+
+    <filter foo.**>
+      type genhashvalue
+
+      use_entire_record true
+      hash_type md5    # md5/sha1/sha256/sha512
+      base64_enc true
+      base91_enc false
+      set_key _hash
+      separator _
+      inc_time_as_key true
+      inc_tag_as_key false
+    </filter>
+    
 
 
 Input:
@@ -57,7 +73,7 @@ Filterd:
 
 After checking out the repo, run first `ridk install` if your ruby has no dev kit installed yet. Then run `bundle install` to install dependencies. Then, run `rake test` to run the tests. 
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To release a new version, update the version number in `.gemspec`, and then create a git tag for the version, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Debug unit test
 Run `gem install ruby-debug-ide` and `gem install debase`.
