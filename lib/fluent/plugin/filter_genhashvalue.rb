@@ -2,7 +2,7 @@ require 'fluent/plugin/filter'
 
 module Fluent::Plugin
   class GenHashValueFilter < Filter
-    Fluent::Plugin.register_filter('genhashvalue', self)
+    Fluent::Plugin.register_filter('genhashvalue-alt', self)
 
 
     config_param :keys, :array
