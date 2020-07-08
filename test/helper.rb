@@ -24,7 +24,7 @@ unless ENV.has_key?('VERBOSE')
   $log = nulllogger
 end
 
-require 'fluent/plugin/filter_genhashvalue'
+require 'fluent/plugin/filter_genhashvalue-alt'
 
 class Test::Unit::TestCase
   include Fluent::Test::Helpers
