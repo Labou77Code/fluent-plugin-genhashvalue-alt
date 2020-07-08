@@ -27,7 +27,7 @@ Or install it yourself as:
 Example if you want to compute hash based on 2 keys (e.g key1 and key2) of your record:
 
     <filter foo.**>
-      type genhashvalue-alt
+      type genhashvalue_alt
 
       keys key1,key2
       hash_type md5    # md5/sha1/sha256/sha512
@@ -42,7 +42,7 @@ Example if you want to compute hash based on 2 keys (e.g key1 and key2) of your 
 Example if you want to compute hash on the entire record:
 
     <filter foo.**>
-      type genhashvalue-alt
+      type genhashvalue_alt
 
       use_entire_record true
       hash_type md5    # md5/sha1/sha256/sha512
